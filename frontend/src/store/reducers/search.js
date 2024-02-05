@@ -1,30 +1,34 @@
-import { GET_SEARCH, RECEIVE_SEARCH, FAIL_SEARCH } from "../actions"
+import {
+  SEARCH_RECIPES_BEGIN,
+  SEARCH_RECIPES_SUCCESS,
+  SEARCH_RECIPES_FAILURE,
+} from "../types"
 
 const initialState = {
-  recipes: null,
-  isLoading: false,
+  data: null,
+  loading: false,
   error: null,
 }
 
 const searchFetching = (state) => {
-  return { ...state, isLoading: true }
+  return { ...state, loading: true }
 }
 
 const searchFetched = (state, payload) => {
-  return { ...state, isLoading: false, recipes: payload }
+  return { ...state, loading: false, data: payload }
 }
 
 const searchFailed = (state, payload) => {
-  return { ...state, isLoading: false, error: payload }
+  return { ...state, loading: false, error: payload }
 }
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case GET_SEARCH:
+    case SEARCH_RECIPES_BEGIN:
       return searchFetching()
-    case RECEIVE_SEARCH:
+    case SEARCH_RECIPES_SUCCESS:
       return searchFetched(state, payload)
-    case FAIL_SEARCH:
+    case SEARCH_RECIPES_FAILURE:
       return searchFailed(state, payload)
     default:
       return state
