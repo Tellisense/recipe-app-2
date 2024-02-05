@@ -14,7 +14,7 @@ interface Query {
 
 const recipeCleaner = (recipe): { id: string; name: string } => {
   const { id, name } = recipe
-  return { id, name }
+  return { _id: id, name }
 }
 
 export const searchMiddleware = async (
